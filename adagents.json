@@ -1,0 +1,40 @@
+{
+  "$schema": "https://adcontextprotocol.org/schemas/v2/adagents.json",
+  "authorized_agents": [
+    {
+      "agent_id": "adrail-escrow-v1",
+      "name": "AdRail Payment Agent",
+      "description": "Escrow, verification, and settlement for agent-to-agent ad transactions",
+      "role": "payment_processor",
+      "capabilities": [
+        "escrow_deposit",
+        "escrow_release",
+        "oracle_verification",
+        "instant_settlement",
+        "dispute_resolution"
+      ],
+      "supported_currencies": ["USDC"],
+      "supported_chains": ["base", "ethereum"],
+      "endpoint": "https://api.adrail.ai/v1",
+      "x402": {
+        "enabled": true,
+        "payment_address": "0x...",
+        "supported_schemes": ["exact", "escrow"]
+      },
+      "verification_oracles": [
+        "moat",
+        "doubleverify",
+        "ias"
+      ],
+      "contact": "hello@adrail.ai"
+    }
+  ],
+  "payment_terms": {
+    "escrow_required": true,
+    "settlement_speed": "instant",
+    "dispute_window_hours": 24,
+    "min_transaction_usd": 0.001,
+    "max_transaction_usd": 100000
+  },
+  "last_updated": "2026-02-12T18:55:00.000Z"
+}
