@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdRail — Keep 95% of Your Ad Revenue</title>
-    <meta name="description" content="Stop losing 40% to middlemen. AdRail is the payment layer for agent advertising. Instant settlement, escrow protection, transparent fees.">
+    <title>AdRail — Real-Time Payments for Real-Time Advertising</title>
+    <meta name="description" content="Get paid as you deliver. Real-time streaming payments for agent advertising. No more 90-day waits. Fireblocks vault security.">
     <link rel="canonical" href="https://adrail.ai/">
-    <meta property="og:title" content="AdRail — Keep 95% of Your Ad Revenue">
-    <meta property="og:description" content="Stop losing 40% to middlemen. Instant settlement, escrow protection, transparent fees.">
+    <meta property="og:title" content="AdRail — Real-Time Payments for Real-Time Advertising">
+    <meta property="og:description" content="Get paid as you deliver. Streaming payments for agent advertising. No more 90-day waits.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://adrail.ai/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AdRail — Keep 95% of Your Ad Revenue">
-    <meta name="twitter:description" content="Stop losing 40% to middlemen. The payment layer for agent advertising.">
+    <meta name="twitter:title" content="AdRail — Real-Time Payments for Real-Time Advertising">
+    <meta name="twitter:description" content="Get paid as you deliver. Streaming payments for agent advertising.">
     <style>
         * {
             margin: 0;
@@ -32,6 +32,7 @@
             --border: #27272a;
             --green: #22c55e;
             --red: #ef4444;
+            --orange: #f97316;
         }
         
         body {
@@ -187,7 +188,7 @@
         }
         
         .hero h1 span {
-            background: linear-gradient(135deg, var(--primary), #a855f7, #ec4899);
+            background: linear-gradient(135deg, var(--green), #22d3ee, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -196,7 +197,7 @@
         .hero-sub {
             font-size: 1.35rem;
             color: var(--text-muted);
-            max-width: 640px;
+            max-width: 680px;
             margin: 0 auto 40px;
         }
         
@@ -224,18 +225,142 @@
             gap: 8px;
         }
         
-        /* Comparison */
-        .comparison {
+        /* Live Demo Animation */
+        .live-demo {
+            padding: 60px 0 100px;
+        }
+        
+        .demo-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .demo-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .demo-live {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            font-size: 0.85rem;
+        }
+        
+        .demo-live::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .demo-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .demo-node {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .demo-node-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.5rem;
+        }
+        
+        .demo-node-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .demo-arrow {
+            color: var(--primary);
+            font-size: 1.25rem;
+            animation: flow 1.5s infinite;
+        }
+        
+        @keyframes flow {
+            0%, 100% { opacity: 0.3; transform: translateX(-4px); }
+            50% { opacity: 1; transform: translateX(4px); }
+        }
+        
+        .demo-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .demo-stat {
+            text-align: center;
+        }
+        
+        .demo-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+        
+        .demo-stat-value.counting {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .demo-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        /* Value Props */
+        .value-props {
             padding: 100px 0;
         }
         
-        .comparison h2 {
+        .value-props h2 {
             text-align: center;
             font-size: 2.75rem;
             margin-bottom: 16px;
         }
         
-        .comparison > .container > p {
+        .value-props > .container > p {
             text-align: center;
             color: var(--text-muted);
             font-size: 1.15rem;
@@ -243,99 +368,100 @@
             margin: 0 auto 60px;
         }
         
-        .comparison-grid {
+        .value-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
         
-        .comparison-card {
+        .value-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 40px;
+            padding: 32px;
+            transition: all 0.2s;
         }
         
-        .comparison-card.old {
-            opacity: 0.7;
-        }
-        
-        .comparison-card.new {
+        .value-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 0 40px var(--primary-glow);
+            transform: translateY(-4px);
         }
         
-        .comparison-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .value-icon {
+            font-size: 2rem;
             margin-bottom: 16px;
         }
         
-        .comparison-card.old .comparison-label {
-            color: var(--red);
+        .value-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
         }
         
-        .comparison-card.new .comparison-label {
-            color: var(--green);
-        }
-        
-        .comparison-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 24px;
-        }
-        
-        .comparison-list {
-            list-style: none;
-        }
-        
-        .comparison-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 16px;
-            color: var(--text-muted);
-        }
-        
-        .comparison-card.old .comparison-list li::before {
-            content: '✗';
-            color: var(--red);
-            font-weight: bold;
-        }
-        
-        .comparison-card.new .comparison-list li::before {
-            content: '✓';
-            color: var(--green);
-            font-weight: bold;
-        }
-        
-        /* Stats */
-        .stats {
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-            text-align: center;
-        }
-        
-        .stat-item h3 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-        
-        .stat-item p {
+        .value-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+        
+        /* Comparison */
+        .comparison {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+        
+        .comparison h2 {
+            text-align: center;
+            font-size: 2.75rem;
+            margin-bottom: 60px;
+        }
+        
+        .comparison-table {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        
+        .comparison-row.header {
+            background: var(--bg);
+        }
+        
+        .comparison-cell {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+        
+        .comparison-cell:last-child {
+            border-right: none;
+        }
+        
+        .comparison-row:last-child .comparison-cell {
+            border-bottom: none;
+        }
+        
+        .comparison-cell.header {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-cell.feature {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .comparison-cell.old {
+            color: var(--red);
+        }
+        
+        .comparison-cell.new {
+            color: var(--green);
+            background: rgba(34, 197, 94, 0.05);
         }
         
         /* How It Works */
@@ -349,62 +475,86 @@
             margin-bottom: 60px;
         }
         
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+        .flow-visual {
+            max-width: 900px;
+            margin: 0 auto;
         }
         
-        .step {
-            text-align: center;
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            margin-bottom: 48px;
             position: relative;
         }
         
-        .step:not(:last-child)::after {
-            content: '→';
+        .flow-step:not(:last-child)::after {
+            content: '';
             position: absolute;
-            right: -20px;
-            top: 40px;
-            color: var(--primary);
-            font-size: 1.5rem;
+            left: 32px;
+            top: 72px;
+            bottom: -24px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
         }
         
-        .step-icon {
-            width: 80px;
-            height: 80px;
+        .flow-number {
+            width: 64px;
+            height: 64px;
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
         }
         
-        .step h4 {
-            font-size: 1.1rem;
+        .flow-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+        
+        .flow-content h4 {
+            font-size: 1.35rem;
             margin-bottom: 8px;
         }
         
-        .step p {
+        .flow-content p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 1rem;
+            margin-bottom: 16px;
         }
         
-        /* Use Cases */
-        .use-cases {
+        .flow-detail {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .flow-detail code {
+            color: var(--green);
+        }
+        
+        /* Security */
+        .security {
             padding: 100px 0;
             background: var(--bg-card);
         }
         
-        .use-cases h2 {
+        .security h2 {
             text-align: center;
             font-size: 2.75rem;
             margin-bottom: 16px;
         }
         
-        .use-cases > .container > p {
+        .security > .container > p {
             text-align: center;
             color: var(--text-muted);
             font-size: 1.15rem;
@@ -412,26 +562,20 @@
             margin: 0 auto 60px;
         }
         
-        .use-cases-grid {
+        .security-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
         
-        .use-case-card {
+        .security-card {
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
-            transition: all 0.2s;
         }
         
-        .use-case-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        
-        .use-case-card h3 {
+        .security-card h3 {
             font-size: 1.25rem;
             margin-bottom: 12px;
             display: flex;
@@ -439,9 +583,63 @@
             gap: 12px;
         }
         
-        .use-case-card p {
+        .security-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+        
+        .vault-visual {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--bg) 0%, rgba(99, 102, 241, 0.1) 100%);
+            border: 1px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            padding: 48px;
+        }
+        
+        .vault-flow {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .vault-node {
+            text-align: center;
+        }
+        
+        .vault-node-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 2rem;
+        }
+        
+        .vault-node-icon.fireblocks {
+            border-color: var(--orange);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        
+        .vault-node-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .vault-node-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .vault-arrow {
+            color: var(--primary);
+            font-size: 1.25rem;
         }
         
         /* Integration */
@@ -467,7 +665,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 48px;
+            gap: 32px;
             flex-wrap: wrap;
         }
         
@@ -475,13 +673,13 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px 40px;
+            padding: 24px 32px;
             text-align: center;
         }
         
         .integration-item span {
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             display: block;
@@ -489,7 +687,7 @@
         }
         
         .integration-item strong {
-            font-size: 1.35rem;
+            font-size: 1.2rem;
         }
         
         /* Pricing */
@@ -512,36 +710,53 @@
             margin: 0 auto 60px;
         }
         
-        .pricing-table {
-            max-width: 700px;
+        .pricing-card {
+            max-width: 500px;
             margin: 0 auto;
             background: var(--bg);
-            border: 1px solid var(--border);
+            border: 2px solid var(--primary);
             border-radius: 16px;
-            overflow: hidden;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 60px var(--primary-glow);
         }
         
-        .pricing-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            padding: 20px 32px;
-            border-bottom: 1px solid var(--border);
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
         }
         
-        .pricing-row:last-child {
-            border-bottom: none;
+        .pricing-card .price {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .pricing-row.header {
-            background: var(--bg-card);
-            font-weight: 600;
-            font-size: 0.9rem;
+        .pricing-card .price-sub {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        
+        .pricing-features {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
             color: var(--text-muted);
         }
         
-        .pricing-row .fee {
+        .pricing-features li::before {
+            content: '✓';
             color: var(--green);
-            font-weight: 600;
+            font-weight: bold;
         }
         
         .pricing-note {
@@ -655,20 +870,25 @@
                 font-size: 3rem;
             }
             
-            .comparison-grid,
-            .use-cases-grid {
+            .value-grid,
+            .security-grid {
                 grid-template-columns: 1fr;
             }
             
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .vault-visual {
+                grid-column: span 1;
+                flex-direction: column;
             }
             
-            .steps {
-                grid-template-columns: repeat(2, 1fr);
+            .comparison-row {
+                grid-template-columns: 1fr;
             }
             
-            .step:not(:last-child)::after {
+            .comparison-cell {
+                border-right: none;
+            }
+            
+            .flow-step::after {
                 display: none;
             }
         }
@@ -686,13 +906,20 @@
                 padding: 120px 0 80px;
             }
             
-            .stats-grid,
-            .steps {
-                grid-template-columns: 1fr;
-            }
-            
             .nav-link {
                 display: none;
+            }
+            
+            .demo-flow {
+                flex-direction: column;
+            }
+            
+            .demo-arrow {
+                transform: rotate(90deg);
+            }
+            
+            .demo-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -712,75 +939,146 @@
     
     <section class="hero">
         <div class="container">
-            <div class="eyebrow">🚀 Now in private beta</div>
-            <h1>Stop Losing 40%<br>to <span>Middlemen</span></h1>
-            <p class="hero-sub">AdRail is the payment layer for agent-to-agent advertising. Escrow protection, oracle verification, instant USDC settlement. Publishers keep 95%+.</p>
+            <div class="eyebrow">⚡ Real-time payments for real-time advertising</div>
+            <h1>Get Paid as<br><span>You Deliver</span></h1>
+            <p class="hero-sub">Stop waiting 90 days. AdRail streams payments to publishers in real-time — every 1,000 impressions verified and paid instantly. Quality control for buyers, instant revenue for publishers.</p>
             <div class="hero-cta">
                 <a href="#waitlist" class="btn btn-primary btn-large">Join the Waitlist →</a>
                 <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
             </div>
             <div class="hero-proof">
-                <span>🔒 Escrow-protected</span>
-                <span>⚡ Instant settlement</span>
+                <span>⚡ Pay per 1K impressions</span>
+                <span>🔒 Fireblocks vault security</span>
                 <span>🔗 Built on x402</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="live-demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="demo-header">
+                    <div class="demo-title">Live Transaction Flow</div>
+                    <div class="demo-live">Streaming</div>
+                </div>
+                <div class="demo-flow">
+                    <div class="demo-node">
+                        <div class="demo-node-icon">🤖</div>
+                        <div class="demo-node-label">Buyer Agent</div>
+                    </div>
+                    <div class="demo-arrow">→</div>
+                    <div class="demo-node">
+                        <div class="demo-node-icon">📡</div>
+                        <div class="demo-node-label">1K Impressions</div>
+                    </div>
+                    <div class="demo-arrow">→</div>
+                    <div class="demo-node">
+                        <div class="demo-node-icon">✓</div>
+                        <div class="demo-node-label">Verify Quality</div>
+                    </div>
+                    <div class="demo-arrow">→</div>
+                    <div class="demo-node">
+                        <div class="demo-node-icon">💰</div>
+                        <div class="demo-node-label">Instant Pay</div>
+                    </div>
+                </div>
+                <div class="demo-stats">
+                    <div class="demo-stat">
+                        <div class="demo-stat-value counting" id="impressions">12,847</div>
+                        <div class="demo-stat-label">Impressions delivered</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="demo-stat-value counting">$<span id="paid">128.47</span></div>
+                        <div class="demo-stat-label">Paid to publisher</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="demo-stat-value">1.2s</div>
+                        <div class="demo-stat-label">Avg settlement time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="value-props">
+        <div class="container">
+            <h2>Why Streaming Payments?</h2>
+            <p>Traditional advertising pays in batches, months late. AdRail pays continuously, in real-time.</p>
+            
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>Instant Revenue</h3>
+                    <p>Publishers get paid the moment impressions are verified. No more net-60 or net-90 terms. Cash flow, not promises.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Real-Time Quality Control</h3>
+                    <p>Buyers evaluate every batch. Bad placements? Stop immediately. Good ones? Scale up. No wasted spend.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔄</div>
+                    <h3>Self-Correcting System</h3>
+                    <p>Bad actors get cut off in real-time. Good publishers earn more. The market optimizes itself.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💸</div>
+                    <h3>No Capital Lock-up</h3>
+                    <p>Buyers don't need to escrow large amounts upfront. Pay as you go, batch by batch.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🚫</div>
+                    <h3>Zero Disputes</h3>
+                    <p>Each micro-batch is verified before payment. No chargebacks, no reconciliation nightmares.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📊</div>
+                    <h3>Full Transparency</h3>
+                    <p>Every payment on-chain. Publishers see exactly what buyers pay. No hidden fees, no surprises.</p>
+                </div>
             </div>
         </div>
     </section>
     
     <section class="comparison">
         <div class="container">
-            <h2>The Old Way vs. AdRail</h2>
-            <p>Programmatic advertising extracts billions. We're giving it back to publishers.</p>
+            <h2>Old Way vs. AdRail</h2>
             
-            <div class="comparison-grid">
-                <div class="comparison-card old">
-                    <div class="comparison-label">Traditional Programmatic</div>
-                    <h3>Death by a thousand cuts</h3>
-                    <ul class="comparison-list">
-                        <li>DSPs take 10-15% off the top</li>
-                        <li>SSPs take another 15-20%</li>
-                        <li>Ad exchanges charge 5-10%</li>
-                        <li>Verification vendors add more fees</li>
-                        <li>Payment in 60-90 days (if you're lucky)</li>
-                        <li>No visibility into actual buyer spend</li>
-                        <li>$84B lost to fraud annually</li>
-                    </ul>
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <div class="comparison-cell header"></div>
+                    <div class="comparison-cell header">Traditional Programmatic</div>
+                    <div class="comparison-cell header">AdRail</div>
                 </div>
-                <div class="comparison-card new">
-                    <div class="comparison-label">With AdRail</div>
-                    <h3>Keep what you earn</h3>
-                    <ul class="comparison-list">
-                        <li>Direct agent-to-agent transactions</li>
-                        <li>0.25% - 1% transparent fee</li>
-                        <li>Publishers keep 95%+ of spend</li>
-                        <li>Oracle verification included</li>
-                        <li>Instant USDC settlement</li>
-                        <li>Full on-chain transparency</li>
-                        <li>Escrow eliminates fraud risk</li>
-                    </ul>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Payment timing</div>
+                    <div class="comparison-cell old">60-90 days</div>
+                    <div class="comparison-cell new">~1 second</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>95%+</h3>
-                    <p>Revenue kept by publishers</p>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Quality feedback</div>
+                    <div class="comparison-cell old">Post-campaign reports</div>
+                    <div class="comparison-cell new">Every 1,000 impressions</div>
                 </div>
-                <div class="stat-item">
-                    <h3><2s</h3>
-                    <p>Settlement time</p>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Bad placement response</div>
+                    <div class="comparison-cell old">Refund negotiations</div>
+                    <div class="comparison-cell new">Stop instantly</div>
                 </div>
-                <div class="stat-item">
-                    <h3>0%</h3>
-                    <p>Fraud with escrow</p>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Publisher revenue kept</div>
+                    <div class="comparison-cell old">51-68%</div>
+                    <div class="comparison-cell new">99%+</div>
                 </div>
-                <div class="stat-item">
-                    <h3>100%</h3>
-                    <p>On-chain transparency</p>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Fee transparency</div>
+                    <div class="comparison-cell old">Hidden, stacked</div>
+                    <div class="comparison-cell new">Single flat %</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Dispute resolution</div>
+                    <div class="comparison-cell old">Weeks of back-and-forth</div>
+                    <div class="comparison-cell new">None needed</div>
                 </div>
             </div>
         </div>
@@ -789,48 +1087,102 @@
     <section class="how-it-works" id="how-it-works">
         <div class="container">
             <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-icon">🤖</div>
-                    <h4>1. Negotiate</h4>
-                    <p>Buyer and publisher agents agree on terms via AdCP</p>
+            
+            <div class="flow-visual">
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h4>Buyer requests impressions</h4>
+                        <p>Buyer agent connects to publisher via AdCP, agrees on targeting and CPM.</p>
+                        <div class="flow-detail">
+                            <code>POST /v1/stream/start</code> → targeting: tech, geo: US, cpm: $10
+                        </div>
+                    </div>
                 </div>
-                <div class="step">
-                    <div class="step-icon">🔒</div>
-                    <h4>2. Escrow</h4>
-                    <p>Buyer deposits USDC into smart contract escrow</p>
+                
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <h4>Publisher delivers batch</h4>
+                        <p>First 1,000 impressions served. Viewability and context signals collected.</p>
+                        <div class="flow-detail">
+                            impressions: <code>1,000</code> | viewability: <code>78%</code> | brand_safe: <code>true</code>
+                        </div>
+                    </div>
                 </div>
-                <div class="step">
-                    <div class="step-icon">✓</div>
-                    <h4>3. Verify</h4>
-                    <p>Oracle confirms ad delivery and viewability</p>
+                
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <h4>Buyer evaluates quality</h4>
+                        <p>Quality meets threshold? Continue. Below threshold? Stop immediately. No wasted spend.</p>
+                        <div class="flow-detail">
+                            quality_score: <code>0.82</code> | threshold: <code>0.70</code> | decision: <code>CONTINUE</code>
+                        </div>
+                    </div>
                 </div>
-                <div class="step">
-                    <div class="step-icon">💰</div>
-                    <h4>4. Settle</h4>
-                    <p>Instant USDC release to publisher wallet</p>
+                
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div class="flow-content">
+                        <h4>Instant USDC payment</h4>
+                        <p>Payment released immediately via x402. Publisher receives funds in ~1 second.</p>
+                        <div class="flow-detail">
+                            amount: <code>$10.00 USDC</code> | settlement: <code>1.2s</code> | tx: <code>0x7f3a...</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-number">5</div>
+                    <div class="flow-content">
+                        <h4>Repeat or scale</h4>
+                        <p>Good quality? Request more. Great quality? Increase budget. The loop continues.</p>
+                        <div class="flow-detail">
+                            next_batch: <code>1,000</code> | budget_remaining: <code>$9,990.00</code> | status: <code>STREAMING</code>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <section class="use-cases">
+    <section class="security">
         <div class="container">
-            <h2>Who It's For</h2>
-            <p>AdRail works for anyone in the agent advertising ecosystem.</p>
+            <h2>Enterprise-Grade Security</h2>
+            <p>Real-time payments, institutional custody. The best of both worlds.</p>
             
-            <div class="use-cases-grid">
-                <div class="use-case-card">
-                    <h3>📰 Publishers</h3>
-                    <p>Stop losing 40% to middlemen. Get paid instantly when ads are served and verified. Full transparency into buyer spend.</p>
+            <div class="security-grid">
+                <div class="security-card">
+                    <h3>🔒 Hot Wallet Limits</h3>
+                    <p>Publishers set maximum hot wallet balance. Funds above threshold auto-sweep to vault.</p>
                 </div>
-                <div class="use-case-card">
-                    <h3>🤖 AI Agents</h3>
-                    <p>Programmatic ad buying without human intervention. Your agent negotiates, pays, and verifies — all automated.</p>
+                <div class="security-card">
+                    <h3>⏰ 24h Auto-Sweep</h3>
+                    <p>Daily automatic transfers to Fireblocks vault. Never leave large balances exposed.</p>
                 </div>
-                <div class="use-case-card">
-                    <h3>📢 Advertisers</h3>
-                    <p>Pay only for verified impressions. Escrow protection means no chargebacks, no fraud, no wasted spend.</p>
+                <div class="security-card vault-visual">
+                    <div class="vault-flow">
+                        <div class="vault-node">
+                            <div class="vault-node-icon">💰</div>
+                            <div class="vault-node-label">Hot Wallet</div>
+                            <div class="vault-node-sub">Real-time payments</div>
+                        </div>
+                        <div class="vault-arrow">→</div>
+                        <div class="vault-node">
+                            <div class="vault-node-icon fireblocks">🏦</div>
+                            <div class="vault-node-label">Fireblocks Vault</div>
+                            <div class="vault-node-sub">Institutional custody</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-card">
+                    <h3>🛡️ Multi-Sig Controls</h3>
+                    <p>Fireblocks MPC technology. No single point of failure. Insurance-backed custody.</p>
+                </div>
+                <div class="security-card">
+                    <h3>📋 Compliance Ready</h3>
+                    <p>Full audit trail. SOC 2 Type II. Ready for enterprise treasury requirements.</p>
                 </div>
             </div>
         </div>
@@ -839,11 +1191,11 @@
     <section class="integration">
         <div class="container">
             <h2>Built on Open Standards</h2>
-            <p>AdRail integrates with the protocols shaping agentic commerce.</p>
+            <p>AdRail integrates with the protocols powering agentic commerce.</p>
             
             <div class="integration-logos">
                 <div class="integration-item">
-                    <span>Media Buying</span>
+                    <span>Media Protocol</span>
                     <strong>AdCP</strong>
                 </div>
                 <div class="integration-item">
@@ -852,11 +1204,15 @@
                 </div>
                 <div class="integration-item">
                     <span>Settlement</span>
-                    <strong>USDC on Base</strong>
+                    <strong>USDC</strong>
                 </div>
                 <div class="integration-item">
-                    <span>Verification</span>
-                    <strong>Moat / DV / IAS</strong>
+                    <span>Chain</span>
+                    <strong>Base</strong>
+                </div>
+                <div class="integration-item">
+                    <span>Custody</span>
+                    <strong>Fireblocks</strong>
                 </div>
             </div>
         </div>
@@ -864,45 +1220,32 @@
     
     <section class="pricing" id="pricing">
         <div class="container">
-            <h2>Simple, Transparent Pricing</h2>
-            <p>No hidden fees. No surprises. Just one flat percentage.</p>
+            <h2>Simple Pricing</h2>
+            <p>One flat fee. No hidden costs. No surprises.</p>
             
-            <div class="pricing-table">
-                <div class="pricing-row header">
-                    <div>Volume / Month</div>
-                    <div>Fee</div>
-                    <div>You Keep</div>
-                </div>
-                <div class="pricing-row">
-                    <div>Under $10K</div>
-                    <div class="fee">1.0%</div>
-                    <div>99%</div>
-                </div>
-                <div class="pricing-row">
-                    <div>$10K – $100K</div>
-                    <div class="fee">0.5%</div>
-                    <div>99.5%</div>
-                </div>
-                <div class="pricing-row">
-                    <div>$100K – $1M</div>
-                    <div class="fee">0.25%</div>
-                    <div>99.75%</div>
-                </div>
-                <div class="pricing-row">
-                    <div>Over $1M</div>
-                    <div class="fee">Custom</div>
-                    <div>Let's talk</div>
-                </div>
+            <div class="pricing-card">
+                <h3>Streaming Payments</h3>
+                <div class="price">1%</div>
+                <div class="price-sub">of transaction volume</div>
+                <ul class="pricing-features">
+                    <li>Real-time streaming payments</li>
+                    <li>Per-batch quality verification</li>
+                    <li>Instant USDC settlement</li>
+                    <li>Fireblocks vault integration</li>
+                    <li>Full on-chain transparency</li>
+                    <li>API access + webhooks</li>
+                </ul>
+                <a href="#waitlist" class="btn btn-primary btn-large" style="width: 100%; justify-content: center;">Join Waitlist</a>
             </div>
             
-            <p class="pricing-note">Compare to 32-49% lost in traditional programmatic. That's real money back in your pocket.</p>
+            <p class="pricing-note">Volume discounts available for $100K+/month. <a href="mailto:hello@adrail.ai" style="color: var(--primary);">Contact us</a></p>
         </div>
     </section>
     
     <section class="cta" id="waitlist">
         <div class="container">
-            <h2>Ready to Keep Your Revenue?</h2>
-            <p>Join the waitlist for early access. Be first in line when we launch.</p>
+            <h2>Ready for Real-Time?</h2>
+            <p>Join the waitlist for early access. Be first to stream payments.</p>
             <form class="cta-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit" class="btn btn-primary btn-large">Join Waitlist</button>
@@ -913,7 +1256,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>© 2026 AdRail. The payment layer for agent advertising.</p>
+                <p>© 2026 AdRail. Real-time payments for real-time advertising.</p>
                 <div class="footer-links">
                     <a href="https://github.com/Heyw00d/Adrail">GitHub</a>
                     <a href="https://adcontextprotocol.org">AdCP</a>
@@ -925,7 +1268,7 @@
     </footer>
 
     <script>
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -935,6 +1278,14 @@
                 }
             });
         });
+        
+        // Animate counter
+        let impressions = 12847;
+        setInterval(() => {
+            impressions += Math.floor(Math.random() * 100) + 50;
+            document.getElementById('impressions').textContent = impressions.toLocaleString();
+            document.getElementById('paid').textContent = (impressions / 100).toFixed(2);
+        }, 2000);
     </script>
 </body>
 </html>
