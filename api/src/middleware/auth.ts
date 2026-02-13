@@ -1,9 +1,13 @@
 import { Context, Next } from 'hono';
+import { db, publishers, advertisers } from '../db/index.js';
+import { eq } from 'drizzle-orm';
 
 export interface AuthContext {
   apiKey: string;
-  agentId: string;
-  tier: 'starter' | 'growth' | 'scale' | 'enterprise';
+  type: 'publisher' | 'advertiser';
+  id: string;
+  name: string;
+  walletAddress: string;
 }
 
 declare module 'hono' {
@@ -23,25 +27,47 @@ export async function authMiddleware(c: Context, next: Next) {
     }, 401);
   }
 
-  // TODO: Validate API key against database
-  // For now, accept any key that starts with 'adrail_'
-  if (!apiKey.startsWith('adrail_') && !apiKey.startsWith('test_')) {
-    return c.json({ error: 'Invalid API key' }, 401);
+  // Check publishers first (pk_ prefix)
+  if (apiKey.startsWith('pk_')) {
+    const [publisher] = await db.select().from(publishers).where(eq(publishers.apiKey, apiKey)).limit(1);
+    if (publisher) {
+      c.set('auth', {
+        apiKey,
+        type: 'publisher',
+        id: publisher.id,
+        name: publisher.name,
+        walletAddress: publisher.walletAddress
+      });
+      return next();
+    }
   }
 
-  // TODO: Look up agent info from database
-  const auth: AuthContext = {
-    apiKey,
-    agentId: apiKey.startsWith('test_') ? 'test-agent' : extractAgentId(apiKey),
-    tier: 'starter' // TODO: Look up from database
-  };
+  // Check advertisers (ak_ prefix)
+  if (apiKey.startsWith('ak_')) {
+    const [advertiser] = await db.select().from(advertisers).where(eq(advertisers.apiKey, apiKey)).limit(1);
+    if (advertiser) {
+      c.set('auth', {
+        apiKey,
+        type: 'advertiser',
+        id: advertiser.id,
+        name: advertiser.name,
+        walletAddress: advertiser.walletAddress
+      });
+      return next();
+    }
+  }
 
-  c.set('auth', auth);
-  await next();
-}
+  // Test mode for development
+  if (apiKey.startsWith('test_')) {
+    c.set('auth', {
+      apiKey,
+      type: 'publisher',
+      id: 'test_pub_123',
+      name: 'Test Publisher',
+      walletAddress: '0x0000000000000000000000000000000000000000'
+    });
+    return next();
+  }
 
-function extractAgentId(apiKey: string): string {
-  // adrail_<agent_id>_<random>
-  const parts = apiKey.split('_');
-  return parts.length >= 2 ? parts[1] : 'unknown';
+  return c.json({ error: 'Invalid API key' }, 401);
 }
