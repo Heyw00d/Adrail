@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { db, payments, publishers, impressions, escrows } from '../db/index.js';
 import { eq, and, desc, sql, isNull } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
+import { sendUsdc, x402Config } from '../services/x402.js';
 
 export const paymentRoutes = new Hono();
 
@@ -77,7 +78,25 @@ paymentRoutes.post('/settle', async (c) => {
     if (!batch.total || batch.total === 0) continue;
 
     const id = `pay_${nanoid(12)}`;
-    const txHash = `0x${nanoid(64).toLowerCase()}`; // TODO: Real x402 payment
+    const amountUsdc = batch.total / 100; // Convert cents to dollars
+
+    // Send real USDC payment
+    const result = await sendUsdc(auth.walletAddress, amountUsdc);
+    
+    if (!result.success) {
+      // Log failed payment but continue with others
+      console.error(`[Payment] Failed ${id}: ${result.error}`);
+      
+      await db.insert(payments).values({
+        id,
+        publisherId: auth.id,
+        escrowId: batch.escrowId,
+        amountUsdc: batch.total,
+        status: 'failed',
+        metadata: { error: result.error }
+      });
+      continue;
+    }
 
     const [payment] = await db.insert(payments).values({
       id,
@@ -85,20 +104,21 @@ paymentRoutes.post('/settle', async (c) => {
       escrowId: batch.escrowId,
       amountUsdc: batch.total,
       status: 'paid',
-      txHash,
+      txHash: result.txHash,
       paidAt: new Date()
     }).returning();
 
     paymentResults.push({
       id: payment.id,
       escrow_id: batch.escrowId,
-      amount_usdc: batch.total / 100,
-      tx_hash: txHash
+      amount_usdc: amountUsdc,
+      tx_hash: result.txHash,
+      chain: x402Config.chainName
     });
 
     totalPaid += batch.total;
 
-    console.log(`[Payment] ${id}: $${batch.total / 100} to ${auth.id} (${txHash.slice(0, 10)}...)`);
+    console.log(`[Payment] ${id}: $${amountUsdc} USDC to ${auth.walletAddress} (${result.txHash?.slice(0, 10)}...)`);
   }
 
   return c.json({

@@ -11,6 +11,7 @@ import { escrowRoutes } from './routes/escrows.js';
 import { impressionRoutes } from './routes/impressions.js';
 import { paymentRoutes } from './routes/payments.js';
 import { authMiddleware } from './middleware/auth.js';
+import { getEscrowWalletInfo, x402Config } from './services/x402.js';
 
 export const app = new Hono();
 
@@ -38,6 +39,24 @@ app.get('/', (c) => {
 
 app.get('/health', (c) => {
   return c.json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
+// x402 payment info (public)
+app.get('/v1/x402/info', async (c) => {
+  const wallet = await getEscrowWalletInfo();
+  return c.json({
+    protocol: 'x402',
+    version: '1.0',
+    testnet: x402Config.isTestnet,
+    facilitator: x402Config.facilitator,
+    network: x402Config.chain,
+    networkName: x402Config.chainName,
+    asset: 'USDC',
+    usdcAddress: x402Config.usdcAddress,
+    payTo: x402Config.escrowWallet,
+    escrowBalance: wallet.balance_usdc,
+    docs: 'https://docs.adrail.ai'
+  });
 });
 
 // ========== PUBLIC REGISTRATION ENDPOINTS ==========

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { db, escrows, impressions, payments } from '../db/index.js';
 import { eq, and, desc, sql } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
+import { verifyUsdcTransfer, x402Config } from '../services/x402.js';
 
 export const escrowRoutes = new Hono();
 
@@ -53,9 +54,11 @@ escrowRoutes.post('/', async (c) => {
     id: escrow.id,
     amount_usdc: escrow.amountUsdc / 100,
     status: escrow.status,
-    payment_address: process.env.ESCROW_WALLET || '0x180560b13249d326e6dC6aa3b2D5900994e2aaBe',
-    chain: 'base',
+    payment_address: x402Config.escrowWallet,
+    chain: x402Config.chainName,
+    network: x402Config.chain,
     token: 'USDC',
+    usdc_contract: x402Config.usdcAddress,
     instructions: 'Send USDC to payment_address, then call POST /v1/escrows/:id/fund with tx_hash',
     created_at: escrow.createdAt
   }, 201);
@@ -93,8 +96,20 @@ escrowRoutes.post('/:id/fund', async (c) => {
     return c.json({ error: `Escrow is already ${escrow.status}` }, 400);
   }
 
-  // TODO: Verify transaction on-chain
-  // For now, trust the tx_hash and mark as funded
+  // Verify transaction on-chain
+  const expectedAmount = escrow.amountUsdc / 100; // Convert cents to dollars
+  const verification = await verifyUsdcTransfer(
+    parsed.data.tx_hash,
+    x402Config.escrowWallet,
+    expectedAmount
+  );
+
+  if (!verification.valid) {
+    return c.json({ 
+      error: 'Transaction verification failed', 
+      details: verification.error 
+    }, 400);
+  }
 
   const [updated] = await db.update(escrows)
     .set({
