@@ -3,13 +3,17 @@ import { z } from 'zod';
 import { db, advertisers, escrows } from '../db/index.js';
 import { eq, desc, sql } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
+import { verifyWalletSignature } from '../services/signature.js';
+import { generateVerifyToken, sendVerificationEmail } from '../services/email.js';
 
 export const advertiserRoutes = new Hono();
 
 const CreateAdvertiserSchema = z.object({
   name: z.string().min(1),
-  email: z.string().email().optional(),
+  email: z.string().email(),
+  company: z.string().optional(),
   wallet_address: z.string().regex(/^0x[a-fA-F0-9]{40}$/, 'Invalid EVM address'),
+  signature: z.string().regex(/^0x[a-fA-F0-9]+$/, 'Invalid signature format'),
   metadata: z.record(z.any()).optional()
 });
 
@@ -25,27 +29,47 @@ advertiserRoutes.post('/', async (c) => {
     return c.json({ error: 'Validation failed', details: parsed.error.flatten() }, 400);
   }
 
+  // Verify wallet signature
+  const sigResult = await verifyWalletSignature(
+    parsed.data.wallet_address,
+    parsed.data.name,
+    parsed.data.signature
+  );
+  
+  if (!sigResult.valid) {
+    return c.json({ error: sigResult.error || 'Invalid signature' }, 401);
+  }
+
   const id = `adv_${nanoid(12)}`;
   const apiKey = `ak_${nanoid(24)}`;
+  const emailVerifyToken = generateVerifyToken();
 
   const [advertiser] = await db.insert(advertisers).values({
     id,
     name: parsed.data.name,
     email: parsed.data.email,
+    emailVerifyToken,
+    company: parsed.data.company,
     walletAddress: parsed.data.wallet_address,
     apiKey,
     metadata: parsed.data.metadata
   }).returning();
 
-  console.log(`[Advertiser] Created ${id}: ${parsed.data.name}`);
+  // Send verification email
+  await sendVerificationEmail(parsed.data.email, parsed.data.name, emailVerifyToken, 'advertiser');
+
+  console.log(`[Advertiser] Created ${id}: ${parsed.data.name} (${parsed.data.email})`);
 
   return c.json({
     id: advertiser.id,
     name: advertiser.name,
     email: advertiser.email,
+    email_verified: advertiser.emailVerified,
+    company: advertiser.company,
     wallet_address: advertiser.walletAddress,
     api_key: advertiser.apiKey, // Only returned once at creation
-    created_at: advertiser.createdAt
+    created_at: advertiser.createdAt,
+    message: 'Check your email to verify your account'
   }, 201);
 });
 
@@ -70,6 +94,8 @@ advertiserRoutes.get('/me', async (c) => {
     id: advertiser.id,
     name: advertiser.name,
     email: advertiser.email,
+    email_verified: advertiser.emailVerified,
+    company: advertiser.company,
     wallet_address: advertiser.walletAddress,
     metadata: advertiser.metadata,
     created_at: advertiser.createdAt
