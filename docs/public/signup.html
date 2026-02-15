@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — AdRail</title>
+    <meta name="description" content="Create your AdRail account. Publishers and advertisers welcome.">
+    <link rel="canonical" href="https://adrail.ai/signup">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --bg: #09090b;
+            --bg-card: #18181b;
+            --bg-card-hover: #1f1f23;
+            --text: #fafafa;
+            --text-muted: #a1a1aa;
+            --border: #27272a;
+            --green: #22c55e;
+            --red: #ef4444;
+            --orange: #f97316;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        
+        /* Nav */
+        nav {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        nav .nav-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Main Content */
+        main {
+            padding-top: 100px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+        
+        /* Account Type Selector */
+        .type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .type-option {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .type-option:hover {
+            border-color: var(--text-muted);
+        }
+        
+        .type-option.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        
+        .type-option h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        
+        .type-option p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        /* Form */
+        .signup-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Wallet Button */
+        .wallet-section {
+            margin-bottom: 20px;
+        }
+        
+        .wallet-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .wallet-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+        }
+        
+        .wallet-btn.connected {
+            border-style: solid;
+            border-color: var(--green);
+            color: var(--green);
+            background: rgba(34, 197, 94, 0.1);
+        }
+        
+        .wallet-address {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+        }
+        
+        /* Submit Button */
+        .btn-primary {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 8px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Status Messages */
+        .status {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .status.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--red);
+            color: var(--red);
+        }
+        
+        .status.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+        
+        .status.info {
+            display: block;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Success State */
+        .success-card {
+            background: var(--bg-card);
+            border: 1px solid var(--green);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success-card.show {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+        
+        .success-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .success-card p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        
+        .api-key-display {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            word-break: break-all;
+        }
+        
+        .api-key-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .copy-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+        
+        .copy-btn:hover {
+            background: var(--bg-card-hover);
+        }
+        
+        .docs-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .docs-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Verified Banner */
+        .verified-banner {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--green);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--text);
+        }
+        
+        /* Mobile */
+        @media (max-width: 540px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .type-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .signup-form {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Ad<span>Rail</span></a>
+            <a href="https://docs.adrail.ai" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Documentation</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Verified Banner (shown after email verification) -->
+            <div id="verifiedBanner" class="verified-banner" style="display: none;">
+                ✓ Email verified successfully! You can now use your API key.
+            </div>
+            
+            <h1>Create Account</h1>
+            <p class="subtitle">Join AdRail and start streaming payments</p>
+            
+            <!-- Account Type Selector -->
+            <div class="type-selector" id="typeSelector">
+                <div class="type-option" data-type="publisher" onclick="selectType('publisher')">
+                    <div class="type-icon">📡</div>
+                    <h3>Publisher</h3>
+                    <p>Display ads, earn revenue</p>
+                </div>
+                <div class="type-option" data-type="advertiser" onclick="selectType('advertiser')">
+                    <div class="type-icon">🚀</div>
+                    <h3>Advertiser</h3>
+                    <p>Buy ad space, reach users</p>
+                </div>
+            </div>
+            
+            <!-- Signup Form -->
+            <div class="signup-form" id="signupForm">
+                <div id="statusMessage" class="status"></div>
+                
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" placeholder="Your name or company" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+                
+                <div class="form-group" id="domainGroup">
+                    <label for="domain">Website Domain</label>
+                    <input type="text" id="domain" placeholder="yoursite.com">
+                </div>
+                
+                <div class="form-group" id="companyGroup" style="display: none;">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" placeholder="Your company name">
+                </div>
+                
+                <div class="wallet-section">
+                    <label>Wallet Address *</label>
+                    <button type="button" class="wallet-btn" id="walletBtn" onclick="connectWallet()">
+                        🦊 Connect Wallet
+                    </button>
+                    <input type="hidden" id="walletAddress">
+                </div>
+                
+                <button type="submit" class="btn-primary" id="submitBtn" onclick="submitForm()" disabled>
+                    Sign Up
+                </button>
+                
+                <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+                    By signing up, you'll sign a message to verify wallet ownership.
+                </p>
+            </div>
+            
+            <!-- Success State -->
+            <div class="success-card" id="successCard">
+                <div class="success-icon">🎉</div>
+                <h2>Welcome to AdRail!</h2>
+                <p>Your account has been created. Check your email to verify.</p>
+                
+                <div class="api-key-label">Your API Key (save this!):</div>
+                <div class="api-key-display" id="apiKeyDisplay"></div>
+                <button class="copy-btn" onclick="copyApiKey()">📋 Copy API Key</button>
+                
+                <p>
+                    <a href="https://docs.adrail.ai/guide/getting-started" class="docs-link">
+                        Read the Getting Started Guide →
+                    </a>
+                </p>
+            </div>
+            
+            <footer>
+                <p><a href="/">← Back to AdRail</a></p>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = 'https://api.adrail.ai'; // Change to localhost:3000 for dev
+        
+        let selectedType = 'publisher';
+        let walletAddress = null;
+        let apiKey = null;
+        
+        // Check URL params for verification status
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('verified') === 'true') {
+            document.getElementById('verifiedBanner').style.display = 'block';
+        }
+        if (urlParams.get('error')) {
+            showStatus(`Error: ${urlParams.get('error')}`, 'error');
+        }
+        
+        function selectType(type) {
+            selectedType = type;
+            document.querySelectorAll('.type-option').forEach(el => {
+                el.classList.toggle('selected', el.dataset.type === type);
+            });
+            
+            // Toggle domain/company fields
+            document.getElementById('domainGroup').style.display = type === 'publisher' ? 'block' : 'none';
+            document.getElementById('companyGroup').style.display = type === 'advertiser' ? 'block' : 'none';
+            
+            checkFormValid();
+        }
+        
+        async function connectWallet() {
+            const btn = document.getElementById('walletBtn');
+            
+            if (typeof window.ethereum === 'undefined') {
+                showStatus('Please install MetaMask or another Web3 wallet', 'error');
+                return;
+            }
+            
+            try {
+                btn.innerHTML = '<span class="spinner"></span>Connecting...';
+                
+                const accounts = await window.ethereum.request({ 
+                    method: 'eth_requestAccounts' 
+                });
+                
+                if (accounts.length > 0) {
+                    walletAddress = accounts[0];
+                    document.getElementById('walletAddress').value = walletAddress;
+                    
+                    const shortAddr = `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
+                    btn.innerHTML = `✓ Connected: <span class="wallet-address">${shortAddr}</span>`;
+                    btn.classList.add('connected');
+                    
+                    checkFormValid();
+                }
+            } catch (error) {
+                console.error('Wallet connection failed:', error);
+                btn.innerHTML = '🦊 Connect Wallet';
+                showStatus('Failed to connect wallet. Please try again.', 'error');
+            }
+        }
+        
+        function checkFormValid() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const hasWallet = !!walletAddress;
+            
+            const isValid = name && email && hasWallet;
+            document.getElementById('submitBtn').disabled = !isValid;
+        }
+        
+        // Listen for input changes
+        document.getElementById('name').addEventListener('input', checkFormValid);
+        document.getElementById('email').addEventListener('input', checkFormValid);
+        
+        async function submitForm() {
+            const btn = document.getElementById('submitBtn');
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const domain = document.getElementById('domain').value.trim();
+            const company = document.getElementById('company').value.trim();
+            
+            if (!name || !email || !walletAddress) {
+                showStatus('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner"></span>Requesting signature...';
+                
+                // Get the message to sign
+                const message = `I am registering for AdRail as ${name}`;
+                
+                // Request signature from wallet
+                const signature = await window.ethereum.request({
+                    method: 'personal_sign',
+                    params: [message, walletAddress]
+                });
+                
+                btn.innerHTML = '<span class="spinner"></span>Creating account...';
+                
+                // Build request body
+                const endpoint = selectedType === 'publisher' 
+                    ? '/v1/publishers/register' 
+                    : '/v1/advertisers/register';
+                
+                const body = {
+                    name,
+                    email,
+                    wallet_address: walletAddress,
+                    signature
+                };
+                
+                if (selectedType === 'publisher' && domain) {
+                    body.domain = domain;
+                }
+                if (selectedType === 'advertiser' && company) {
+                    body.company = company;
+                }
+                
+                // Submit to API
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Registration failed');
+                }
+                
+                // Success!
+                apiKey = data.api_key;
+                document.getElementById('apiKeyDisplay').textContent = apiKey;
+                
+                // Hide form, show success
+                document.getElementById('signupForm').style.display = 'none';
+                document.getElementById('typeSelector').style.display = 'none';
+                document.getElementById('successCard').classList.add('show');
+                
+            } catch (error) {
+                console.error('Registration failed:', error);
+                btn.disabled = false;
+                btn.innerHTML = 'Sign Up';
+                
+                if (error.code === 4001) {
+                    showStatus('Signature request was cancelled', 'error');
+                } else {
+                    showStatus(error.message || 'Registration failed. Please try again.', 'error');
+                }
+            }
+        }
+        
+        function copyApiKey() {
+            if (apiKey) {
+                navigator.clipboard.writeText(apiKey).then(() => {
+                    const btn = event.target;
+                    btn.textContent = '✓ Copied!';
+                    setTimeout(() => {
+                        btn.textContent = '📋 Copy API Key';
+                    }, 2000);
+                });
+            }
+        }
+        
+        function showStatus(message, type) {
+            const el = document.getElementById('statusMessage');
+            el.textContent = message;
+            el.className = `status ${type}`;
+        }
+        
+        // Initialize
+        selectType('publisher');
+    </script>
+</body>
+</html>
