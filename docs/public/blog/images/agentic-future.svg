@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  
+  <!-- Network nodes representing agents -->
+  <circle cx="200" cy="150" r="30" fill="url(#accent)" opacity="0.8"/>
+  <circle cx="400" cy="100" r="25" fill="url(#accent)" opacity="0.6"/>
+  <circle cx="600" cy="180" r="35" fill="url(#accent)" opacity="0.9"/>
+  <circle cx="300" cy="280" r="28" fill="url(#accent)" opacity="0.7"/>
+  <circle cx="500" cy="300" r="32" fill="url(#accent)" opacity="0.8"/>
+  
+  <!-- Connection lines -->
+  <line x1="200" y1="150" x2="400" y2="100" stroke="#6366f1" stroke-width="2" opacity="0.4"/>
+  <line x1="400" y1="100" x2="600" y2="180" stroke="#6366f1" stroke-width="2" opacity="0.4"/>
+  <line x1="200" y1="150" x2="300" y2="280" stroke="#6366f1" stroke-width="2" opacity="0.4"/>
+  <line x1="300" y1="280" x2="500" y2="300" stroke="#6366f1" stroke-width="2" opacity="0.4"/>
+  <line x1="600" y1="180" x2="500" y2="300" stroke="#6366f1" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Agent icons -->
+  <text x="200" y="158" font-family="system-ui" font-size="20" fill="white" text-anchor="middle">🤖</text>
+  <text x="400" y="108" font-family="system-ui" font-size="16" fill="white" text-anchor="middle">🤖</text>
+  <text x="600" y="188" font-family="system-ui" font-size="22" fill="white" text-anchor="middle">🤖</text>
+  <text x="300" y="288" font-family="system-ui" font-size="18" fill="white" text-anchor="middle">🤖</text>
+  <text x="500" y="308" font-family="system-ui" font-size="20" fill="white" text-anchor="middle">🤖</text>
+</svg>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>AdRail Blog</title>
+    <description>Insights on agent advertising, programmatic efficiency, and building the future of AI-powered commerce.</description>
+    <link>https://docs.adrail.ai/blog/</link>
+    <atom:link href="https://docs.adrail.ai/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Feb 2026 00:00:00 GMT</lastBuildDate>
+    <generator>AdRail VitePress Blog</generator>
+    
+    <item>
+      <title>The Future of Agentic Advertising: When AI Agents Become the Audience</title>
+      <link>https://docs.adrail.ai/blog/future-of-agentic-advertising</link>
+      <guid>https://docs.adrail.ai/blog/future-of-agentic-advertising</guid>
+      <pubDate>Sat, 15 Feb 2026 00:00:00 GMT</pubDate>
+      <description>Exploring how AI agents are transforming from ad blockers to ad interpreters—and why this changes everything for digital advertising.</description>
+      <category>Vision</category>
+      <author>team@adrail.ai (AdRail Team)</author>
+    </item>
+    
+    <item>
+      <title>The Hidden Tax: Why Programmatic Advertising Loses 60% Before Reaching Publishers</title>
+      <link>https://docs.adrail.ai/blog/programmatic-inefficiency</link>
+      <guid>https://docs.adrail.ai/blog/programmatic-inefficiency</guid>
+      <pubDate>Wed, 12 Feb 2026 00:00:00 GMT</pubDate>
+      <description>Breaking down the ad tech supply chain and exposing where your advertising dollars actually go—and why agents deserve better.</description>
+      <category>Industry</category>
+      <author>team@adrail.ai (AdRail Team)</author>
+    </item>
+    
+    <item>
+      <title>Why Publishers Deserve 95%: Our Revenue Share Philosophy</title>
+      <link>https://docs.adrail.ai/blog/why-publishers-deserve-95-percent</link>
+      <guid>https://docs.adrail.ai/blog/why-publishers-deserve-95-percent</guid>
+      <pubDate>Sat, 08 Feb 2026 00:00:00 GMT</pubDate>
+      <description>The economic case for giving publishers the lion's share—and why we believe this creates a better advertising ecosystem.</description>
+      <category>Product</category>
+      <author>team@adrail.ai (AdRail Team)</author>
+    </item>
+  </channel>
+</rss>

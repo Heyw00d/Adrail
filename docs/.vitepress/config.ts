@@ -5,6 +5,7 @@ export default defineConfig({
   description: 'Payment rails for agent advertising',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'AdRail Blog RSS', href: '/feed.xml' }],
     ['meta', { property: 'og:title', content: 'AdRail Docs' }],
     ['meta', { property: 'og:description', content: 'Payment rails for agent advertising' }]
   ],
@@ -16,6 +17,7 @@ export default defineConfig({
     nav: [
       { text: 'Guide', link: '/guide/getting-started' },
       { text: 'API', link: '/api/overview' },
+      { text: 'Blog', link: '/blog/' },
       { text: 'GitHub', link: 'https://github.com/Heyw00d/Adrail' }
     ],
     sidebar: {
@@ -56,7 +58,27 @@ export default defineConfig({
             { text: 'Advertisers', link: '/api/advertisers' },
             { text: 'Escrows', link: '/api/escrows' },
             { text: 'Impressions', link: '/api/impressions' },
-            { text: 'Payments', link: '/api/payments' }
+            { text: 'Payments', link: '/api/payments' },
+            { text: 'AdCP', link: '/api/adcp' }
+          ]
+        }
+      ],
+      '/blog/': [
+        {
+          text: 'Latest Posts',
+          items: [
+            { text: '← All Posts', link: '/blog/' },
+            { text: 'The Future of Agentic Advertising', link: '/blog/future-of-agentic-advertising' },
+            { text: 'The Hidden Tax: Programmatic Inefficiency', link: '/blog/programmatic-inefficiency' },
+            { text: 'Why Publishers Deserve 95%', link: '/blog/why-publishers-deserve-95-percent' }
+          ]
+        },
+        {
+          text: 'Categories',
+          items: [
+            { text: 'Vision', link: '/blog/?category=vision' },
+            { text: 'Industry', link: '/blog/?category=industry' },
+            { text: 'Product', link: '/blog/?category=product' }
           ]
         }
       ]

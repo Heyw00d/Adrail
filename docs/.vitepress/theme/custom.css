@@ -1,0 +1,73 @@
+/* Custom blog styles */
+
+/* Blog index page */
+.blog-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* Enhanced code blocks in blog posts */
+.blog-post .vp-code-group {
+  margin: 1.5rem 0;
+}
+
+/* Better table styling for blog */
+.blog-post table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+.blog-post th,
+.blog-post td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.blog-post th {
+  font-weight: 600;
+  background: var(--vp-c-bg-soft);
+}
+
+/* Blog card hover animations */
+.blog-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* RSS link styling */
+.rss-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.rss-link a:hover {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+/* Dark mode adjustments */
+.dark .blog-card {
+  background: var(--vp-c-bg-soft);
+}
+
+.dark .blog-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
