@@ -87,7 +87,7 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/Heyw00d/Adrail' }
     ],
     footer: {
-      message: 'Built with x402 • USDC on Base',
+      message: 'Built with x402 • USDC on Base • <a href="https://aiagentsdirectory.com/agent/adrail" target="_blank">Featured on AI Agents Directory</a>',
       copyright: '© 2026 AdRail'
     }
   }
