@@ -47,6 +47,13 @@ export default defineConfig({
             { text: 'x402 Protocol', link: '/guide/x402' },
             { text: 'AdCP Integration', link: '/guide/adcp' }
           ]
+        },
+        {
+          text: 'Development',
+          items: [
+            { text: 'Docker Setup', link: '/guide/docker' },
+            { text: 'Testnet Guide', link: '/guide/testnet' }
+          ]
         }
       ],
       '/api/': [

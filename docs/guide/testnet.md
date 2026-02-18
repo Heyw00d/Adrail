@@ -1,196 +1,170 @@
-# Testing Testnet
+# Testnet Guide
 
-Test your AdRail integration without risking real money.
+Test AdRail on Base Sepolia before going to mainnet.
 
-::: tip Testnet Mode
-All testnet transactions are free, reversible, and use fake USDC. Perfect for development and testing.
+## Overview
+
+AdRail uses **Base Sepolia** (testnet) for development and testing. This lets you:
+- Test x402 payments without real money
+- Verify your integration works correctly
+- Debug issues before mainnet deployment
+
+## Requirements
+
+1. A testnet wallet (MetaMask, Rabby, etc.)
+2. Testnet ETH (for gas)
+3. Testnet USDC (for payments)
+
+## Step 1: Create Test Wallet
+
+::: tip Use a Dedicated Wallet
+Create a new wallet just for testing. Never use your mainnet wallet or expose its private key.
 :::
 
-## Testnet vs Mainnet
+1. Open MetaMask → Click account icon → Create Account
+2. Name it "AdRail Testnet" or similar
+3. Copy the address for the next steps
 
-| Feature | Testnet (Testnet) | Mainnet (Production) |
-|---------|-------------------|----------------------|
-| Network | Base Sepolia | Base |
-| Chain ID | 84532 | 8453 |
-| USDC | Fake (free) | Real |
-| API Base | `api.adrail.ai` | `api.adrail.ai` |
-| API Key Prefix | `pk_test_` | `pk_live_` |
+## Step 2: Add Base Sepolia Network
 
-## Getting Started with Testnet
+Add Base Sepolia to MetaMask:
 
-### 1. Get a Testnet API Key
+| Field | Value |
+|-------|-------|
+| Network Name | Base Sepolia |
+| RPC URL | `https://sepolia.base.org` |
+| Chain ID | 84532 |
+| Currency | ETH |
+| Explorer | `https://sepolia.basescan.org` |
 
-When you register, specify testnet mode:
+Or use [Chainlist](https://chainlist.org/?search=base+sepolia&testnets=true) to add it automatically.
 
-```bash
-curl -X POST https://api.adrail.ai/v1/publishers \
-  -H "Content-Type: application/json" \
-  -d '{
-    "domain": "test.yoursite.com",
-    "wallet_address": "0xYourWalletAddress",
-    "name": "Test Publisher",
-    "email": "dev@yoursite.com",
-    "testnet": true
-  }'
-```
+## Step 3: Get Testnet ETH
 
-You'll receive a testnet API key starting with `pk_test_`:
+You need ETH for gas fees. Options:
 
-```json
-{
-  "publisher_id": "pub_test_abc123",
-  "api_key": "pk_test_xxxxxxxx",
-  "status": "active",
-  "network": "base-sepolia"
-}
-```
+### BaseScan Faucet (Recommended)
+1. Go to [sepolia-faucet.basescan.org](https://sepolia-faucet.basescan.org/)
+2. Connect wallet or paste address
+3. Request ETH (may require Alchemy login)
 
-### 2. Get Free Test USDC
+### Coinbase Faucet
+1. Visit [faucet.quicknode.com/base/sepolia](https://faucet.quicknode.com/base/sepolia)
+2. Connect wallet
+3. Claim testnet ETH
 
-You need test USDC to simulate advertiser escrows.
+## Step 4: Get Testnet USDC
 
-**Circle Faucet (Recommended):**
+AdRail uses USDC for payments. Get testnet USDC:
+
+### Circle Faucet
 1. Go to [faucet.circle.com](https://faucet.circle.com/)
 2. Select "Base Sepolia"
 3. Enter your wallet address
-4. Receive 10 test USDC
+4. Request USDC
 
-**Get Test ETH for Gas:**
-1. Visit [alchemy.com/faucets/base-sepolia](https://www.alchemy.com/faucets/base-sepolia)
-2. Enter your wallet address
-3. Receive 0.1 test ETH
-
-### 3. Configure MetaMask for Testnet
-
-Add Base Sepolia network:
-
+### USDC Contract on Base Sepolia
 ```
-Network Name: Base Sepolia
-RPC URL: https://sepolia.base.org
-Chain ID: 84532
-Currency: ETH
-Explorer: https://sepolia.basescan.org
+0x036CbD53842c5426634e7929541eC2318f3dCF7e
 ```
 
-Or one-click: [chainlist.org/chain/84532](https://chainlist.org/chain/84532)
+## Step 5: Export Private Key
 
-## Testing Workflows
+For programmatic testing, you'll need the private key:
 
-### Test Publisher Flow
+1. MetaMask → Click ⋮ on the test account
+2. Account Details → Export Private Key
+3. Enter password
+4. Copy the key (starts with 0x...)
 
-```bash
-# 1. Register (testnet)
-curl -X POST https://api.adrail.ai/v1/publishers \
-  -d '{"domain":"test.example.com","wallet_address":"0x...","testnet":true}'
-
-# 2. Report test impressions
-curl -X POST https://api.adrail.ai/v1/impressions \
-  -H "Authorization: Bearer pk_test_xxx" \
-  -d '{"escrow_id":"esc_test_abc","count":1000}'
-
-# 3. Check balance
-curl https://api.adrail.ai/v1/publishers/account \
-  -H "Authorization: Bearer pk_test_xxx"
-
-# 4. Request settlement
-curl -X POST https://api.adrail.ai/v1/publishers/settle \
-  -H "Authorization: Bearer pk_test_xxx"
-```
-
-### Test Advertiser Flow
-
-```bash
-# 1. Register as advertiser (testnet)
-curl -X POST https://api.adrail.ai/v1/advertisers \
-  -d '{"name":"Test Advertiser","wallet_address":"0x...","testnet":true}'
-
-# 2. Create test escrow
-curl -X POST https://api.adrail.ai/v1/escrows \
-  -H "Authorization: Bearer pk_test_xxx" \
-  -d '{"amount_usdc":"100","cpm":"5.00","target_publishers":["test.example.com"]}'
-
-# 3. Monitor escrow
-curl https://api.adrail.ai/v1/escrows/esc_test_abc \
-  -H "Authorization: Bearer pk_test_xxx"
-```
-
-## Test Escrows
-
-We provide pre-funded test escrows for publisher testing:
-
-| Escrow ID | CPM | Budget | Purpose |
-|-----------|-----|--------|---------|
-| `esc_test_standard` | $5.00 | $1000 | General testing |
-| `esc_test_premium` | $15.00 | $500 | High-CPM testing |
-| `esc_test_low` | $1.00 | $5000 | Volume testing |
-
-Use these escrow IDs in your test impression reports.
-
-## Debugging Tools
-
-### Check Transaction on Testnet
-
-View your testnet transactions:
-```
-https://sepolia.basescan.org/address/YOUR_WALLET_ADDRESS
-```
-
-### Verify Test USDC Balance
-
-```bash
-# Check on-chain balance
-curl "https://sepolia.basescan.org/api?module=account&action=tokenbalance&contractaddress=0x...&address=YOUR_WALLET"
-```
-
-### API Request Logging
-
-Add `?debug=true` to log detailed request/response:
-
-```bash
-curl "https://api.adrail.ai/v1/publishers/account?debug=true" \
-  -H "Authorization: Bearer pk_test_xxx"
-```
-
-## Migrating to Production
-
-When ready to go live:
-
-1. **Register with production API key:**
-```bash
-curl -X POST https://api.adrail.ai/v1/publishers \
-  -d '{"domain":"yoursite.com","wallet_address":"0x...","testnet":false}'
-```
-
-2. **Update your code:**
-   - Replace `pk_test_` with `pk_live_`
-   - Switch wallet to Base mainnet
-   - Remove test escrow IDs
-
-3. **Verify mainnet wallet:**
-   - Ensure you have a small amount of ETH on Base for gas
-   - Double-check your wallet address is correct
-
-::: danger Production Checklist
-Before going live:
-- [ ] Tested full flow on testnet
-- [ ] Correct mainnet wallet address
-- [ ] API key stored securely (not in code)
-- [ ] Error handling implemented
-- [ ] Webhook endpoint ready (if using)
+::: danger Keep It Secret
+Even for testnet, treat your private key like a password. Don't commit it to git or share it publicly.
 :::
 
-## Common Testnet Issues
+## Step 6: Configure AdRail
 
-### "Escrow not found" on testnet
+Add to your `.env`:
 
-The test escrows reset daily. Use the current test escrow IDs listed above.
+```bash
+# Testnet wallet
+WALLET_PRIVATE_KEY=0x...your_testnet_key...
 
-### Test USDC not showing in wallet
+# Base Sepolia RPC
+RPC_URL=https://sepolia.base.org
 
-1. Add USDC token to MetaMask manually
-2. Contract address (Base Sepolia): `0x...` 
-3. Ensure you're on Base Sepolia network
+# USDC on Base Sepolia
+USDC_ADDRESS=0x036CbD53842c5426634e7929541eC2318f3dCF7e
+```
 
-### Settlement not arriving
+## Testing Payments
 
-Testnet settlements may take longer (up to 10 min). Check [sepolia.basescan.org](https://sepolia.basescan.org) for transaction status.
+### Register as Publisher
+
+```bash
+curl -X POST https://testnet.adrail.ai/v1/publishers \
+  -H "Content-Type: application/json" \
+  -d '{
+    "wallet": "0xYourTestnetWallet",
+    "agent_id": "test-agent-001"
+  }'
+```
+
+### Create Ad Slot
+
+```bash
+curl -X POST https://testnet.adrail.ai/v1/slots \
+  -H "Content-Type: application/json" \
+  -d '{
+    "publisher_id": "...",
+    "slot_type": "banner",
+    "price_per_view": "0.001"
+  }'
+```
+
+### Request Ad (with x402)
+
+The x402 payment header is generated automatically by compatible clients:
+
+```javascript
+import { x402Fetch } from '@x402/fetch';
+
+const response = await x402Fetch('https://testnet.adrail.ai/v1/ads/request', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ slot_id: '...' }),
+  wallet: yourWallet, // ethers.js wallet with testnet USDC
+});
+```
+
+## Testnet vs Mainnet
+
+| Feature | Testnet | Mainnet |
+|---------|---------|---------|
+| Network | Base Sepolia | Base |
+| API | testnet.adrail.ai | api.adrail.ai |
+| USDC | Test tokens | Real USDC |
+| Gas | Free testnet ETH | Real ETH |
+
+## Troubleshooting
+
+### "Insufficient USDC"
+Request more from the [Circle faucet](https://faucet.circle.com/).
+
+### "Transaction failed: out of gas"
+Request more testnet ETH from a faucet.
+
+### "Invalid network"
+Ensure your wallet is connected to Base Sepolia (Chain ID: 84532).
+
+## Moving to Mainnet
+
+When ready for production:
+
+1. Create a new wallet or use your secure mainnet wallet
+2. Fund with real USDC and ETH on Base
+3. Update `.env` to use mainnet values:
+   - `RPC_URL=https://mainnet.base.org`
+   - `USDC_ADDRESS=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`
+4. Deploy to production infrastructure
+
+See [Deployment Guide](/guide/deployment) for production setup.

@@ -1,0 +1,41 @@
+# AdRail - Docker Compose for Testing
+# 
+# Quick start:
+#   docker-compose up -d
+#
+# Connect to testnet (Base Sepolia) for x402 payments testing.
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      # Use .env.example as template, or pass your own .env file
+      # Required: DATABASE_URL, WALLET_PRIVATE_KEY, RPC_URL
+    env_file:
+      - ./api/.env
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=adrail
+      - POSTGRES_PASSWORD=adrail_dev
+      - POSTGRES_DB=adrail
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adrail"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
