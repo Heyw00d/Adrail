@@ -122,7 +122,7 @@ Official libraries for popular languages:
 | [Complete Tutorial](/guide/complete-tutorial) | 15-min end-to-end walkthrough |
 | [API Reference](/api/) | Full endpoint documentation |
 | [Troubleshooting](/guide/troubleshooting) | Common errors & solutions |
-| [Testing Sandbox](/guide/testing-sandbox) | Test without real money |
+| [Testnet](/guide/testnet) | Test without real money |
 
 ## Get Help
 
