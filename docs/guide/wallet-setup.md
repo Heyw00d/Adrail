@@ -12,6 +12,25 @@ Don't worry — this guide assumes zero crypto experience. We'll walk through ev
 - A smartphone or computer
 - 5 minutes
 
+## What is USDC?
+
+**USDC** (USD Coin) is a **stablecoin** — a cryptocurrency designed to always be worth exactly $1 USD.
+
+Unlike Bitcoin or Ethereum which fluctuate in price, 1 USDC = 1 USD. Always.
+
+**Why AdRail uses USDC:**
+- 💵 **Stable value** — No price volatility. $100 USDC today = $100 tomorrow
+- ⚡ **Instant settlement** — Payments arrive in seconds, not days
+- 🌍 **Global** — Send/receive anywhere, no bank required
+- 💰 **Low fees** — Fractions of a cent on Base network
+
+**Who issues USDC?**
+USDC is issued by [Circle](https://circle.com), a regulated US financial company. Every USDC is backed 1:1 by US dollars held in reserve, audited monthly.
+
+::: tip Think of it like...
+USDC is digital dollars. Same value as USD, but moves on blockchain rails instead of bank rails.
+:::
+
 ## What is an EVM Wallet?
 
 An **EVM wallet** is like a bank account for cryptocurrency. "EVM" stands for Ethereum Virtual Machine — it's the technology that powers Ethereum and compatible networks like **Base** (where AdRail payments happen).
