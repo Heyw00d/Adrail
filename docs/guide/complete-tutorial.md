@@ -224,7 +224,7 @@ curl -X POST https://api.adrail.ai/v1/publishers/settle \
 ## What's Next?
 
 - [AdCP Integration](/guide/adcp) - Connect AdRail with the Ad Context Protocol
-- [Testing Sandbox](/guide/testing-sandbox) - Test with fake money before going live
+- [Testnet](/guide/testnet) - Test with fake money before going live
 - [Troubleshooting](/guide/troubleshooting) - Common errors and how to fix them
 - [Webhooks](/guide/webhooks) - Get real-time notifications for payments
 
