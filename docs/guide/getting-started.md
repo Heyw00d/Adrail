@@ -1,100 +1,131 @@
 # Getting Started
 
-Get up and running with AdRail in 5 minutes.
+Welcome to AdRail — agent-to-agent media payments with near-zero fees.
 
-## Prerequisites
+## Choose Your Path
 
-- An EVM wallet address (for receiving/sending USDC)
-- USDC on Base (mainnet) or Base Sepolia (testnet)
+<div class="vp-card-container">
 
-## 1. Choose Your Role
+### I'm a Publisher
+**Earn USDC for ad impressions**
 
-### For Publishers (earning money)
+- Receive payments directly to your wallet
+- Zero gas fees (we pay them)
+- Withdraw to bank anytime
 
-Publishers display ads and earn USDC for verified impressions.
+[Publisher Quick Start →](/guide/publisher-quickstart)
 
-```bash
-# Register as a publisher
-curl -X POST https://api.adrail.ai/v1/publishers/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My Website",
-    "domain": "example.com",
-    "wallet_address": "0xYourWalletAddress"
-  }'
+### I'm an Advertiser  
+**Buy impressions with USDC**
+
+- Fund with credit card or crypto
+- Pay only for verified impressions
+- ~99% goes to publishers
+
+[Advertiser Quick Start →](/guide/advertiser-quickstart)
+
+</div>
+
+## How AdRail Works
+
+```
+┌─────────────┐    USDC     ┌─────────────┐
+│  Advertiser │ ─────────▶  │   Escrow    │
+│  (Buyer)    │             │   (Locked)  │
+└─────────────┘             └──────┬──────┘
+                                   │
+                            Impressions
+                                   │
+                                   ▼
+┌─────────────┐    USDC     ┌─────────────┐
+│  Publisher  │ ◀───────────│   AdRail    │
+│  (Earner)   │   (instant) │   Protocol  │
+└─────────────┘             └─────────────┘
 ```
 
-Response:
-```json
-{
-  "id": "pub_abc123",
-  "name": "My Website",
-  "api_key": "pk_live_xxxxxxxxxxxxxxxx",
-  "wallet_address": "0xYourWalletAddress"
-}
-```
+1. **Advertisers** fund escrows with USDC (via credit card or crypto)
+2. **Publishers** serve ads and report impressions
+3. **AdRail** verifies and settles payments instantly
+4. **Publishers** receive USDC directly — withdraw to bank anytime
 
-::: warning Save Your API Key
-The `api_key` is only shown once. Store it securely.
+## Why USDC?
+
+| Feature | Traditional Ads | AdRail + USDC |
+|---------|-----------------|---------------|
+| Fees | 32-49% | **~1%** |
+| Payment speed | Net 30-90 days | **Instant** |
+| Minimum payout | $100+ | **$1** |
+| Global payments | Complex | **Same as local** |
+| Currency risk | High | **None (pegged to USD)** |
+
+## Networks
+
+### Base (Primary)
+
+AdRail runs on **Base**, Coinbase's Layer 2 network:
+- Fast (~2 second finality)
+- Cheap (~$0.001 per transaction)
+- Battle-tested infrastructure
+
+::: tip Zero Gas for Publishers
+Publishers never pay gas. We cover all transaction costs.
 :::
 
-### For Advertisers (spending money)
+### ARC (Coming Soon)
 
-Advertisers fund escrows and pay for impressions.
+We're adding support for [ARC](https://arc.circle.com), Circle's new blockchain:
+- Gas fees paid in USDC (no ETH needed)
+- Even simpler advertiser on-ramp
+- Native USDC experience
 
-```bash
-# Register as an advertiser
-curl -X POST https://api.adrail.ai/v1/advertisers/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My Company",
-    "email": "ads@example.com",
-    "wallet_address": "0xYourWalletAddress"
-  }'
-```
+[Join the ARC waitlist →](mailto:arc@adrail.ai)
 
-Response:
-```json
-{
-  "id": "adv_xyz789",
-  "name": "My Company",
-  "api_key": "ak_live_xxxxxxxxxxxxxxxx",
-  "wallet_address": "0xYourWalletAddress"
-}
-```
+## Integration Options
 
-## 2. Check Your Account
+### 1. Direct API
+
+Full control with our REST API:
 
 ```bash
-# Publishers
-curl https://api.adrail.ai/v1/publishers/me \
-  -H "Authorization: Bearer pk_live_xxxxxxxxxxxxxxxx"
+# Publisher: Report impressions
+curl -X POST https://api.adrail.ai/v1/impressions \
+  -H "Authorization: Bearer pk_xxx" \
+  -d '{"escrow_id": "esc_abc", "count": 1000}'
 
-# Advertisers
-curl https://api.adrail.ai/v1/advertisers/me \
-  -H "Authorization: Bearer ak_live_xxxxxxxxxxxxxxxx"
+# Advertiser: Create escrow  
+curl -X POST https://api.adrail.ai/v1/escrows \
+  -H "Authorization: Bearer ak_xxx" \
+  -d '{"amount_usdc": "100", "cpm": "5.00"}'
 ```
 
-## 3. Network Configuration
+### 2. AdCP Integration
 
-AdRail runs on Base. Check the current configuration:
+Automated agent-to-agent buying via the Ad Context Protocol:
 
-```bash
-curl https://api.adrail.ai/v1/x402/info
-```
+- AI agents negotiate and buy programmatically
+- Escrow IDs flow through bid responses
+- Zero manual intervention
 
-```json
-{
-  "network": "eip155:8453",
-  "networkName": "Base",
-  "asset": "USDC",
-  "usdcAddress": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-  "payTo": "0x..."
-}
-```
+[AdCP Integration Guide →](/guide/adcp)
 
-## Next Steps
+### 3. SDKs (Coming Soon)
 
-- **Publishers**: Learn about [reporting impressions](/guide/impressions) and [receiving payments](/guide/payments)
-- **Advertisers**: Learn about [creating escrows](/guide/escrows) and funding campaigns
-- **Both**: Check the [API Reference](/api/overview) for all endpoints
+Official libraries for popular languages:
+- Node.js / TypeScript
+- Python
+- Go
+
+## Quick Links
+
+| Resource | Description |
+|----------|-------------|
+| [Complete Tutorial](/guide/complete-tutorial) | 15-min end-to-end walkthrough |
+| [API Reference](/api/) | Full endpoint documentation |
+| [Troubleshooting](/guide/troubleshooting) | Common errors & solutions |
+| [Testing Sandbox](/guide/testing-sandbox) | Test without real money |
+
+## Get Help
+
+- 📧 **Email:** [support@adrail.ai](mailto:support@adrail.ai)
+- 💬 **Discord:** [discord.gg/adrail](https://discord.gg/adrail)
+- 🐦 **Twitter:** [@aaborail](https://twitter.com/adrail)
