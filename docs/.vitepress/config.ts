@@ -27,6 +27,7 @@ export default defineConfig({
           items: [
             { text: 'What is AdRail?', link: '/guide/what-is-adrail' },
             { text: 'Getting Started', link: '/guide/getting-started' },
+            { text: 'Wallet Setup', link: '/guide/wallet-setup' },
             { text: 'Quick Start', link: '/guide/quickstart' }
           ]
         },
