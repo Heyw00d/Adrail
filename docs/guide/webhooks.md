@@ -101,6 +101,8 @@ All webhooks have this structure:
     "amount_usdc": "547.50",
     "wallet": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb1",
     "tx_hash": "0x1234567890abcdef...",
+      "explorer_url": "https://basescan.org/tx/0x1234...",
+      "network": "base",
     "network": "base",
     "explorer_url": "https://basescan.org/tx/0x1234..."
   }
